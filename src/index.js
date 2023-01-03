@@ -5,14 +5,14 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import CommentList from './comment/CommentList';
+import NotificationList from './Notification/NotificationList'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // setInterval(() => {
 
   root.render(
-    <React.StrictMode>
-      <CommentList />
-    </React.StrictMode>
+      <NotificationList />
   );
 // }, 1000);
 
