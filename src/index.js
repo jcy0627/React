@@ -4,15 +4,15 @@ import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import CommentList from './comment/CommentList';
-import NotificationList from './Notification/NotificationList'
-
+import CommentList from './Component/CommentList';
+// import NotificationList from './Lifecycle/NotificationList'
+import Accommodate from "./Hooks/Accommodate";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // setInterval(() => {
 
   root.render(
-      <NotificationList />
+      <Accommodate />
   );
 // }, 1000);
 

@@ -247,30 +247,126 @@ Lifecycle methods 제공
 
 예시
 
-    useState()
+## useState()
 state를 사용하기위한 훅이다.
 
 사용법
 
-    const [ 변수명 , set함수명 ] = useState(초기값);
+    const [ 변수명 , set함수명 ] = useState(변수의 초기값);
 
 변수 각각에 대해 set 함수가 따로 존재한다.
 
+변수가 State고, 이 state를 업데이트하는 함수를 쌍으로 만들었다.
+이 함수를 이벤트 핸들러나, 다른곳에서 호출 할 수있다.
 
-    useEffect() - 라이프사이클 함수와 동일한 기능을 수행할 수 있다.
+클래스 컴포넌트
+```js
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+```
+함수 컴포넌트
+```js
+function Example() {
+  const [count, setCount] = useState(0);
+```
+
+
+
+## useEffect() - 라이프사이클 함수와 동일한 기능을 수행할 수 있다.
 side effect에 대한 처리
 (다른 컴포넌트에 영향을 미칠 수 있고 렌더링 중에는 작업이 완료 될 수 없다.)
 
 사용법 : 
 
-    useEffect(이펙트 함수, 의존성 배열);
+ 	useEffect(이펙트 함수, 의존성 배열);
 배열 안의 변수중 하나라도 값이 변경되었을 때 이펙트 함수가 실행된다.
 
 
+만약 Effect 함수를 mount 와 unmount 에 한번만 실행하고 싶다면
+
+	 useEffect(이펙트 함수, []);
+의존성 배열에 빈 배열을 넣으면 props 나 state에 의존되지 않으므로, 여러번 실행되지 않고 첫 함수 호출시에만 실행.
+
+만약 업데이트시마다 사용하고 싶다면.
+
+ 	useEffect(이펙트 함수);
+함수 컴포넌트 업데이트때 마다 호출됨
+
+
+
+useEffect의 에시
+
+```js
+import React, { useState, useEffect } from "react"
+
+function Counter(props){
+    const [count, setCount] = useState(0);
+
+
+    // componentDidmount, componentDidUpdate 와 유사하게 작동
+    useEffect(() => {
+        document.title = `you clicked ${count} times `;
+    });
+//컴포넌트 마운트를 포함한 업데이트 시 마다 실행된다.
+    return(
+        <div>
+            <p> 총 {count}번 클릭했습니다.</p>
+            <button onClick={()=>setCount(count+1)}>
+                클릭
+            </button>
+        </div>
+    )
+}
+```
+해석 : useState로 count 변수와 setCount 함수의 초기화와 업데이트를 지정해줬고, useEffect 에서 의존성 배열이 없기때문에
+모든 업데이트시 마다 호출된다. 따라서, 클릭시 마다 Count 가 업데이트 되고, useEffect가 호출되0어,
+이펙트함수의 document.title 변환이 이루어짐.
+
+
+
+useEffect 로 componentDidUnmounted 구현하기.
+
+useEffect 의 return 은 cleanup 함수다. 컴포넌트의 상태 변경 중 Unmount 될 때 실행된다.
+
+>주의 : 의존성 배열에 변하는 값이 있으면 배열값이 변할때 실행됨.
+
+```js
+function startTimer() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setCount(prevCount => prevCount + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <h1>{count}</h1>;
+}
+```
 
 
 
 
+useMemo
+
+Memoization
+비용이 높은(연산이 많은) 함수의 결과를 미리 가지고 있다가 재 호출시 전송.
 
 
+>유의 렌더링이 일어나는동안 실행되기때문에 조심.
 
+useCallback
+useMemo와 비슷하지만 값이아닌 함수를 반환함.
+
+
+useRef
+레퍼런스 객체를 반환.  
+refObject.current   
+current 는 현재 참조하고있는 Element
+
+```js
+const refContainer = useRef(초깃값);
+```
