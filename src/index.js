@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-import CommentList from './Component/CommentList';
+// import ConfirmButton from "./Event/ConfirmButton";
+// import CommentList from './Component/CommentList';
 // import NotificationList from './Lifecycle/NotificationList'
-import Accommodate from "./Hooks/Accommodate";
-
+// import Accommodate from "./Hooks/Accommodate";
+import reportWebVitals from "./reportWebVitals";
+import LandingPage from "./ComditionalRendering/LandingPage";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // setInterval(() => {
 
   root.render(
-      <Accommodate />
+      <LandingPage />
   );
 // }, 1000);
 

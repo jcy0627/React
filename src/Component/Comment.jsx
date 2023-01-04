@@ -43,6 +43,7 @@ function Comment(props) {
             <div style={styles.imageContainer}>
                 <img
                     src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                    alt="face"
                     style={styles.image}
                 />
             </div>

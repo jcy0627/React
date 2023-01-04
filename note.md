@@ -245,6 +245,11 @@ Lifecycle methods 제공
 
 이름앞에 use 를 붙여서 훅임을 알림.
 
+Hook은 무조건 최상위레벨에서만 호출해야한다.
+(함수 컴포넌트안에서의 최상위로, 반복문이나 조건문 안에 있으면 안된다.)
+Hook은 컴포넌트가 렌더링 될 때 마다 같은 순서로 호출되어야한다.
+
+
 예시
 
 ## useState()
@@ -252,30 +257,9 @@ state를 사용하기위한 훅이다.
 
 사용법
 
-    const [ 변수명 , set함수명 ] = useState(변수의 초기값);
+    const [ 변수명 , set함수명 ] = useState(초기값);
 
 변수 각각에 대해 set 함수가 따로 존재한다.
-
-변수가 State고, 이 state를 업데이트하는 함수를 쌍으로 만들었다.
-이 함수를 이벤트 핸들러나, 다른곳에서 호출 할 수있다.
-
-클래스 컴포넌트
-```js
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    };
-  }
-```
-함수 컴포넌트
-```js
-function Example() {
-  const [count, setCount] = useState(0);
-```
-
-
 
 ## useEffect() - 라이프사이클 함수와 동일한 기능을 수행할 수 있다.
 side effect에 대한 처리
@@ -283,19 +267,20 @@ side effect에 대한 처리
 
 사용법 : 
 
- 	useEffect(이펙트 함수, 의존성 배열);
+ useEffect(이펙트 함수, 의존성 배열);
 배열 안의 변수중 하나라도 값이 변경되었을 때 이펙트 함수가 실행된다.
 
 
 만약 Effect 함수를 mount 와 unmount 에 한번만 실행하고 싶다면
 
-	 useEffect(이펙트 함수, []);
-의존성 배열에 빈 배열을 넣으면 props 나 state에 의존되지 않으므로, 여러번 실행되지 않고 첫 함수 호출시에만 실행.
+ useEffect(이펙트 함수, []);
+의존성 배열에 빈 배열을 넣으면 props 나 state에 의존되지 않으므로, 여러번 실행되지 않는다
 
 만약 업데이트시마다 사용하고 싶다면.
-
- 	useEffect(이펙트 함수);
-함수 컴포넌트 업데이트때 마다 호출됨
+    
+    
+ useEffect(이펙트 함수);
+컴포넌트 업데이트때 마다 호출됨
 
 
 
@@ -323,29 +308,9 @@ function Counter(props){
     )
 }
 ```
-해석 : useState로 count 변수와 setCount 함수의 초기화와 업데이트를 지정해줬고, useEffect 에서 의존성 배열이 없기때문에
-모든 업데이트시 마다 호출된다. 따라서, 클릭시 마다 Count 가 업데이트 되고, useEffect가 호출되0어,
-이펙트함수의 document.title 변환이 이루어짐.
-
-
 
 useEffect 로 componentDidUnmounted 구현하기.
 
-useEffect 의 return 은 cleanup 함수다. 컴포넌트의 상태 변경 중 Unmount 될 때 실행된다.
-
->주의 : 의존성 배열에 변하는 값이 있으면 배열값이 변할때 실행됨.
-
-```js
-function startTimer() {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setCount(prevCount => prevCount + 1), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  return <h1>{count}</h1>;
-}
-```
 
 
 
@@ -370,3 +335,79 @@ current 는 현재 참조하고있는 Element
 ```js
 const refContainer = useRef(초깃값);
 ```
+
+
+## Event 
+
+카멜표기법 사용
+중간에 나오는 새로운 글자를 대문자로 표기하여 구분.
+
+    <button onClick= {}>
+
+클래스 컴포넌트에선 바인딩을 해야한다.
+
+바인딩
+컴포넌트와 이벤트 함수를 연결(bind)한다
+
+바인딩 하지 않아도 이벤트는 사용 가능하나, 어던 컴포넌트가 호출을 했는지 알 수 없기 때문에 클로벌스코프에서 호출되는데, props나 state 사용시 undefined 로 처리된다.
+
+
+함수 컴포넌트에선 onClick 에 바로 함수를 넣어서 사용 가능
+
+
+## Conditional Rendering
+
+
+조건부 렌더링
+
+
+두 컴포넌트 중 선택하여 보여주는 Greeting 컴포넌트
+```js
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+// Try changing to isLoggedIn={true}:
+root.render(<Greeting isLoggedIn={false} />);
+```
+
+
+&& 연산자
+```js
+return(
+    <div>
+        { 조건 &&    
+            조건 렌더링할 컴포넌트   
+        }   
+    </div>
+)
+```
+
+삼항 연산자
+```js
+return (
+    <div>
+		{조건변수
+			? <loginButton onClick={handleLogout}/>
+			: <loginButton onClick={handleLogin}/>
+		}
+	</div>
+)
+```
+
+특정 컴포넌트 렌더링을 안함
+return null;
+
+
+조건이 true 일때만 보여줌.
+
+리액트의 Map 함수는 꼭 Key 값이 필요하다.
+
+
+
+
