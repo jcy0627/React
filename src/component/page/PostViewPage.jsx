@@ -5,10 +5,11 @@ import Button from "../ui/Button";
 import data from "../../data.json";
 import Library from "../../JSX/Library";
 import AttendanceBook from "../../ListAndKey/AttendanceBook";
-import Notification from "../../Lifecycle/Notification";
 import Accommodate from "../../Hooks/Accommodate";
 import ConfirmButton from "../../Event/ConfirmButton";
 import Clock from "../../Element/Clock";
+import CommentList from "../../Props/CommentList";
+import NotificationList from "../../Lifecycle/NotificationList";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -77,10 +78,11 @@ function PostViewPage(props) {
                 </PostContainer>
 
                 <CommentLabel>예제</CommentLabel>
-                <div>{setInterval }
+                <div>
                 {(post.id==1) &&<Library></Library>}
                 {(post.id==2) &&<Clock></Clock>}
-                {(post.id==4) &&<Notification></Notification>}
+                {(post.id==3) &&<CommentList></CommentList>}
+                {(post.id==4) &&<NotificationList></NotificationList>}
                 {(post.id==5) &&<ConfirmButton></ConfirmButton>}
                 {(post.id==6) &&<Accommodate></Accommodate>}
                    
