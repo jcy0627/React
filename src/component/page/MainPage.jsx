@@ -31,19 +31,13 @@ function MainPage(props) {
     return (
         <Wrapper>
             <Container>
-                <Button
-                    title="글 작성하기"
-                    onClick={() => {
-                        navigate("/post-write");
-                    }}
-                />
-
+{
                 <PostList
                     posts={data}
                     onClickItem={(item) => {
-                        navigate(`/post/${item.id}`);
+                        navigate(`/Post/${item.id}`);
                     }}
-                />
+                /> }
             </Container>
         </Wrapper>
     );

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import CommentList from "../list/CommentList";
-import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
 import data from "../../data.json";
+import Library from "../../JSX/Library";
+import AttendanceBook from "../../ListAndKey/AttendanceBook";
+import Notification from "../../Lifecycle/Notification";
+import Accommodate from "../../Hooks/Accommodate";
+import ConfirmButton from "../../Event/ConfirmButton";
+import Clock from "../../Element/Clock";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -72,22 +76,16 @@ function PostViewPage(props) {
                     <ContentText>{post.content}</ContentText>
                 </PostContainer>
 
-                <CommentLabel>댓글</CommentLabel>
-                <CommentList comments={post.comments} />
-
-                <TextInput
-                    height={40}
-                    value={comment}
-                    onChange={(event) => {
-                        setComment(event.target.value);
-                    }}
-                />
-                <Button
-                    title="댓글 작성하기"
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                />
+                <CommentLabel>예제</CommentLabel>
+                <div>{setInterval }
+                {(post.id==1) &&<Library></Library>}
+                {(post.id==2) &&<Clock></Clock>}
+                {(post.id==4) &&<Notification></Notification>}
+                {(post.id==5) &&<ConfirmButton></ConfirmButton>}
+                {(post.id==6) &&<Accommodate></Accommodate>}
+                   
+                </div>
+    
             </Container>
         </Wrapper>
     );

@@ -4,7 +4,7 @@ import Book from "./Book";
 function Library(props) {
     return (
         <div>
-            <Book name="리액트 초기 가이드" numOfPage={300} />
+            <Book name="JSX name Props 삽입" numOfProps={300} />
         </div>
     )
 }
