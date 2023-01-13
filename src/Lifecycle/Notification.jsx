@@ -19,16 +19,16 @@ const styles = {
 class Notification extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {}; // state
     }
 
-    componentDidMount() { // 컴포넌트 생성
+    componentDidMount() { // 컴포넌트 생성 시
         console.log(`${this.props.id}   mount`);
     }
-    componentDidUpdate() { // 컴포넌트 업데이트
+    componentDidUpdate() { // 컴포넌트 업데이트 시
         console.log(`${this.props.id}  update`);
     }
-    componentWillUnmount() { // 컴포넌트 제거
+    componentWillUnmount() { // 컴포넌트 소멸 시
         console.log(`${this.props.id}  unmount`);
     }
 

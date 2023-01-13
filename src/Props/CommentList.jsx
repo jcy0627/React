@@ -21,9 +21,6 @@ function CommentList(props) {
                     <Comment name={comment.name} comment={comment.comment} />// 내부 컴포넌트 props
                 );
             })}
-
-            
-            
         </div>
     );
 }

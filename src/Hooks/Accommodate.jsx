@@ -12,13 +12,14 @@ function Accommodate(props) {
         console.log("-------------");
         console.log("useEffect is called");
         console.log(`isFull : ${isFull}`);
-    }
-    );
+        
+    } // 가득찼는지에 대한 체크
+    );// 모든 컴포넌트 변경에 실행.
 
     useEffect(() => {
         setIsFull(count >= MAX_CAPACITY);
         console.log(`Current count value: ${count}`);
-    }, [count]);
+    }, [count]);//count 값이 변경될때마다 실행.
 
     return (
         <div style={{ padding: 16 }}>

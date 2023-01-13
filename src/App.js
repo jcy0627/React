@@ -9,13 +9,13 @@ import styled from "styled-components";
 import MainPage from './component/page/MainPage';
 import PostWritePage from './component/page/PostWritePage';
 import PostViewPage from './component/page/PostViewPage';
-import CommentList from "./Props/CommentList";
-import AttendanceBook from "./ListAndKey/AttendanceBook";
-import Notification from "./Lifecycle/Notification";
-import Library from "./JSX/Library";
-import Accommodate from "./Hooks/Accommodate";
-import Confirmbutton from "./Event/ConfirmButton"
-import Clock from "./Element/Clock"
+// import CommentList from "./Props/CommentList";
+// import AttendanceBook from "./ListAndKey/AttendanceBook";
+// import Notification from "./Lifecycle/Notification";
+// import Library from "./JSX/Library";
+// import Accommodate from "./Hooks/Accommodate";
+// import Confirmbutton from "./Event/ConfirmButton"
+// import Clock from "./Element/Clock"
 
 const MainTitleText = styled.p`
     font-size: 24px;
@@ -31,13 +31,13 @@ function App(props) {
                 <Route index element={<MainPage />} />
                 <Route path="post-write" element={<PostWritePage />} />
                 <Route path="post/:postId" element={<PostViewPage />} />
-                <Route path="comment" element={<CommentList />} />
+                {/* <Route path="comment" element={<CommentList />} />
                 <Route path="attendanceBook" element={<AttendanceBook />} />
                 <Route path="notification" element={<Notification />} />
                 <Route path="library" element={<Library />} />
                 <Route path="accommodate" element={<Accommodate />} />
                 <Route path="confirmButton" element={<Confirmbutton />} />
-                <Route path="clock" element={<Clock />} />
+                <Route path="clock" element={<Clock />} /> */}
             </Routes>
         </BrowserRouter>
     );

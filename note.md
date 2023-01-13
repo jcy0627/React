@@ -410,4 +410,94 @@ return null;
 
 
 
+프로젝트 설치 파일
+
+react-router-dom  
+페이지 전환을 위해 설치.
+거의 모든 React 프로젝트에 필요 // 버전이 올라가면서 안씀.
+
+styled-component
+컴포넌트 디자인 패키지 
+
+npm install --save react-router-dom styled-components
+
+훅 : 라이프사이클 기능을 함수 컴포넌트에서 사용할 수 있다.
+
+또한, 자주 호출되는 연산
+
+
+
+
+상태관리
+
+Redux / Reack Hooks / Recoil
+
+컴포넌트간에 데이터를 공유하는 데이터 구조를 생성한다.
+
+이렇게 하지 않으면,  Props Drilling. 즉 하위 컴포넌트로 계속 Props를 전달해야함.
+
+
+Redux : Store JavaScrip 객체 제공.
+Store가 사용자의 액션에 반응하여 업데이트
+액션 - > dispatch(액션) -> reducer -> store
+
+
+Recoil : 최근 나온 상태관리 방법
+
+Reack Hooks
+
+useReducer Hook 
+
+useContext Hook
+
+const value = useContext(SomeContext)
+```js
+import { createContext, useContext } from 'react';
+
+const ThemeContext = createContext(null);
+
+export default function MyApp() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Form />
+    </ThemeContext.Provider>
+  )
+}
+
+function Form() {
+  return (
+    <Panel title="Welcome">
+      <Button>Sign up</Button>
+      <Button>Log in</Button>
+    </Panel>
+  );
+}
+
+function Panel({ title, children }) {
+  const theme = useContext(ThemeContext);
+  const className = 'panel-' + theme;
+  return (
+    <section className={className}>
+      <h1>{title}</h1>
+      {children}
+    </section>
+  )
+}
+
+function Button({ children }) {
+  const theme = useContext(ThemeContext);
+  const className = 'button-' + theme;
+  return (
+    <button className={className}>
+      {children}
+    </button>
+  );
+}
+
+```
+ContextProvider
+    <Context.Provider value={{속성 : 속성명}}>
+    {children}
+    </Context.Provider>
+
 
